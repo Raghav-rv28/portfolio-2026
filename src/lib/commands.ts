@@ -3,6 +3,7 @@ import { projects } from "@/src/data/projects";
 import { experience } from "@/src/data/experience";
 import { skills } from "@/src/data/skills";
 import { getPathString, formatUptime, type TerminalState } from "./terminal";
+import { redirect } from "next/navigation";
 
 export type CommandResult = {
   output: string;
@@ -132,11 +133,14 @@ function handleCd(args: string[], currentPath: string[]): CommandResult {
     };
   }
   
-  // Already in a folder - can only go back with ".."
-  // (For now, we don't support nested folders beyond one level)
-  return {
-    output: `cd: no such file or directory: ${target}\nUse 'cd ..' to go back to parent directory.`,
-  };
+  if( target === "blog") {
+    // navigate to the /blog page
+    redirect("/blogs");
+  }
+  if (!rootFolders.includes(target.toLowerCase())) {
+    return { output: `cd: no such file or directory: ${target}\nAvailable folders: ${rootFolders.join(", ")}` };
+  }
+  return { output: "" };
 }
 
 function handleCat(args: string[], path: string[]): CommandResult {
@@ -258,6 +262,12 @@ function handleNeofetch(state: TerminalState): CommandResult {
 
   return {
     output: `
+            _     _           _        _   
+           / \\   | |__   ___ | |_ __ _| |_ 
+          / _ \\  | '_ \\ / _ \\| __/ _\` | __|
+         / ___ \\ | | | | (_) | || (_| | |_ 
+        /_/   \\_\\|_| |_|\\___/ \\__\\__,_|\\__|
+                                          
        ${personal.name}@portfolio
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         OS: Portfolio Terminal v1.0
