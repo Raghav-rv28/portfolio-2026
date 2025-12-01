@@ -15,7 +15,7 @@ export type HistoryProvider = {
   getAllWithTimestamps: () => Array<{ command: string; timestamp: Date }>;
 };
 
-const rootFolders = ["about", "projects", "experience", "skills", "contact", "blog"];
+const rootFolders = ["about", "projects", "experience", "skills", "contact"];
 const rootFiles = ["readme.txt", "resume.pdf"];
 
 export function executeCommand(
@@ -82,7 +82,6 @@ function handleHelp(): CommandResult {
     "  cd experience   - Navigate to experience folder",
     "  cd skills       - Navigate to skills folder",
     "  cd contact      - Navigate to contact folder",
-    "  cd blog         - Navigate to blog folder",
     "",
     "  Inside any folder, use 'cat data.txt' to view contents",
   ];
@@ -111,7 +110,7 @@ function handleCd(args: string[], currentPath: string[]): CommandResult {
     return { output: "cd: missing argument\nUsage: cd [folder] or cd .." };
   }
   const target = args[0];
-  
+
   // Handle going up one directory
   if (target === "..") {
     if (currentPath.length === 0) {
@@ -120,7 +119,7 @@ function handleCd(args: string[], currentPath: string[]): CommandResult {
     // Valid navigation - return empty output (success)
     return { output: "" };
   }
-  
+
   // Handle navigating into a folder
   // Can only navigate into root folders when at root, or navigate into subfolders
   if (currentPath.length === 0) {
@@ -132,11 +131,7 @@ function handleCd(args: string[], currentPath: string[]): CommandResult {
       output: `cd: no such file or directory: ${target}\nAvailable folders: ${rootFolders.join(", ")}`,
     };
   }
-  
-  if( target === "blog") {
-    // navigate to the /blog page
-    redirect("/blogs");
-  }
+
   if (!rootFolders.includes(target.toLowerCase())) {
     return { output: `cd: no such file or directory: ${target}\nAvailable folders: ${rootFolders.join(", ")}` };
   }
@@ -203,17 +198,6 @@ Experience: ${personal.yearsExperience}+ years`,
         return handleSkills();
       case "contact":
         return handleContact();
-      case "blog":
-        return {
-          output: `Blog
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Coming soon! Check back later for technical articles and insights.
-
-In the meantime, you can find me on:
-- LinkedIn: ${personal.linkedin}
-- GitHub: ${personal.github}`,
-        };
       default:
         break;
     }
@@ -382,7 +366,7 @@ function handleHistory(historyProvider?: HistoryProvider): CommandResult {
   }
 
   const history = historyProvider.getAllWithTimestamps();
-  
+
   if (history.length === 0) {
     return { output: "No command history found." };
   }
@@ -411,10 +395,10 @@ function handleHistory(historyProvider?: HistoryProvider): CommandResult {
   // Create table format
   const maxIndexWidth = String(history.length).length;
   const maxTimeWidth = 10; // "999d ago" is max
-  
+
   const header = `  ${"#".padEnd(maxIndexWidth)}  ${"Time".padEnd(maxTimeWidth)}  Command`;
   const separator = "  " + "─".repeat(maxIndexWidth) + "  " + "─".repeat(maxTimeWidth) + "  " + "─".repeat(50);
-  
+
   const rows = history
     .map((entry, index) => {
       const num = String(index + 1).padEnd(maxIndexWidth);

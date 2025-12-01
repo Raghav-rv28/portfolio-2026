@@ -6,22 +6,22 @@ import { Button } from "@/components/ui/button";
 const components: MDXComponents = {
   // Map HTML elements to custom components
   h1: ({ children, ...props }) => (
-    <h1 className="text-4xl font-black mb-6 text-foreground" {...props}>
+    <h1 className="text-4xl font-black mb-6 text-foreground mt-12 first:mt-0" {...props}>
       {children}
     </h1>
   ),
   h2: ({ children, ...props }) => (
-    <h2 className="text-3xl font-black mb-4 text-foreground mt-8" {...props}>
+    <h2 className="text-3xl font-black mb-5 text-foreground mt-10 first:mt-0" {...props}>
       {children}
     </h2>
   ),
   h3: ({ children, ...props }) => (
-    <h3 className="text-2xl font-bold mb-3 text-foreground mt-6" {...props}>
+    <h3 className="text-2xl font-bold mb-4 text-foreground mt-8 first:mt-0" {...props}>
       {children}
     </h3>
   ),
   p: ({ children, ...props }) => (
-    <p className="mb-4 text-lg leading-relaxed text-foreground/90" {...props}>
+    <p className="mb-6 text-lg leading-relaxed text-foreground/90 first:mt-20" {...props}>
       {children}
     </p>
   ),

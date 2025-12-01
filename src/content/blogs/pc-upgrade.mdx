@@ -1,0 +1,78 @@
+export const metadata = {
+  title: "The $300 Windows 11 PC That Cost Me Three Days and My Will to Live",
+  description:
+    "",
+  date: "2025-12-01",
+  author: "Raghav Rudhra",
+  tags: ["Hardware", "Technology", "Data Recovery", "Sanity"],
+  readTime: 5,
+};
+
+
+Last Thursday morning I walked into the office like a hero.
+
+“Guys, today we finally retire the beige XP dinosaur and move to a shiny new Windows 11 Gaming PC with GTX 3060 (1TB nvme, 32 gigs ddr4; lol you thought 5? have you seen those prices?)
+ on black friday sale for literally $800. By tomorrow night we’ll be sipping coffee and laughing at how ancient that thing was.”
+
+> **💡 Note:**  someone laughed, but not us.
+
+---
+
+### The “Simple” Migration
+The old machine was running:
+- A custom printing software from 2003 that talks to a dot-matrix printer older than most of my coworkers
+- A purity-checking machine that still used two usb ports at the same time which i had to pass through VMware
+- An inventory system that looks like it was coded by someone who had only heard rumors of what a GUI is
+- And a horoscope generator for customers. I wish I was joking.
+
+All of these gems relied on 32-bit drivers that haven’t been updated since MySpace was cool. Windows 11 just laughed, flipped me the bird, and refused to install any of them.
+
+---
+
+### Wait, Where’s the Backup?
+
+>Plot twist: there wasn’t one.
+
+10+ years of accounting files, customer records, and (for reasons I’ll never understand) 400 MB of saved horoscopes lived exclusively on that single 1TB SATA hard drive. And the second we pulled the plug on the old PC to install the new one,
+my dumb ahh decided to not even backup now (then), because God has a sense of humor, the XP installation decided to stop booting.
+
+Cue two hours of icacls, takeown, and me whispering sweet nothings to the Command Prompt like it was a scared rescue puppy. Eventually the files appeared. I’ve never been so relieved to see a folder named “ACCT_2008_FINAL_FINAL_reallyfinal”.
+
+### VMware, My Old Friend
+With the data safe(ish), the real dragon appeared: getting the actual software to run.
+Plan B: virtualize XP inside VMware Workstation. Sounds simple, right? Wrong.
+
+- Had to passthrough the USB ports (first time so kinda fudged it up alot)
+- Had to passthrough an ancient PCI graphics card because the purity machine only outputs to VGA and refuses to believe HDMI was invented.
+---
+### Rebuilding the Softwares
+
+One of the apps needed Microsoft SQL Server Express 2008. Yes, 2008. i must have installed it like 10 times and everytime at 90+ % the goober decided to hang up on me.
+i had to hack my way through using powershell and custom commands i got from openAI. no dude i do not know every single damn powershell command. im a WSL + win user, sue me.
+
+So close to the finishline though, i found myself in another trap. the inventory software, written in .NET was not working on windows 11. contact support? in this business i am the support.
+these guys call me in for a broken pen drive not working what did i expect. there is no support, just me and my AI elves working through the night. 
+
+3 coffees, a few bashed heads, and a snowy depressing saturday night later i finally fixed the damn thing and managed to compile it again.
+
+---
+
+### Sunday 9:07 p.m.
+
+Everything works. The dot-matrix printer screeches to life like a fax machine having an asthma attack. The purity machine beeps in approval. The horoscope software prints “Congratulations, you are now a calamity survivor.” Close enough.
+
+We started Thursday at 9 a.m. thinking we’d be done by Friday close-of-business. We actually finished Sunday night
+
+---
+
+#### Lessons Learned (Please Tattoo These on Your Forehead)
+
+1. Backups are not optional. They are oxygen.
+2. “We’ll just move the hard drive” is famous last words.
+3. If your critical business app runs on Windows XP in 2025, you are living on borrowed time and pure spite.
+4. Web apps > desktop apps from the George W. Bush administration.
+5. Sometimes the cheapest upgrade is the one where you throw the entire old PC into the ocean and pay a developer to rebuild everything properly.
+
+(See you next time I say “How hard can it be?”)
+
+*Raghav Rudhra*

@@ -17,27 +17,19 @@ export function BlogCard({ blog }: BlogCardProps) {
   };
 
   return (
-    <Link href={`/blogs/${blog.slug}`} className="block h-full">
-      <Card className="blog-card h-full flex flex-col bg-[#0a0a0a] border-[#00ff00] hover:border-[#00ffff] transition-all duration-300">
-        <CardHeader>
+      <Card className="blog-card flex flex-col h-full justify-end p-20 bg-[#0a0a0a] border-[#00ff00] hover:border-[#00ffff] transition-all duration-300">
+        <Link href={`/blogs/${blog.slug}`} className="h-full">
+        <CardHeader className="pt-6">
           <div className="flex items-start justify-between gap-4 mb-2">
-            <CardTitle className="blog-title text-2xl font-bold text-[#00ffff] line-clamp-2 flex-1" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+            <CardTitle className="text-2xl font-bold text-[#00ffff] line-clamp-2 flex-1" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
               {blog.title}
             </CardTitle>
-            {blog.readTime && (
-              <Badge
-                variant="outline"
-                className="border-[#00ff00] text-[#00ff00] font-bold shrink-0"
-              >
-                {blog.readTime} min
-              </Badge>
-            )}
           </div>
           <CardDescription className="text-[#00ff00]/70 text-base font-medium">
             {formatDate(blog.date)} • {blog.author}
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex-1 flex flex-col">
+        <CardContent className="flex-1 flex flex-col pb-6">
           <p className="text-foreground/80 text-lg mb-4 line-clamp-3 flex-1">
             {blog.description}
           </p>
@@ -47,7 +39,7 @@ export function BlogCard({ blog }: BlogCardProps) {
                 <Badge
                   key={tag}
                   variant="secondary"
-                  className="bg-[#ff00ff]/20 text-[#ff00ff] border border-[#ff00ff]/50 font-bold"
+                  className="bg-[#ff00ff]/20 text-[#ff00ff] border border-[#ff00ff]/50 font-bold px-2.5 py-1"
                 >
                   {tag}
                 </Badge>
@@ -55,8 +47,8 @@ export function BlogCard({ blog }: BlogCardProps) {
             </div>
           )}
         </CardContent>
+        </Link>
       </Card>
-    </Link>
   );
 }
 

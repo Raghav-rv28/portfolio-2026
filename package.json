@@ -25,8 +25,8 @@
     "rehype-pretty-code": "^0.14.1",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.4.0",
-    "xterm": "^5.3.0",
-    "xterm-addon-fit": "^0.8.0"
+    "@xterm/xterm": "latest",
+    "@xterm/addon-fit": "latest"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

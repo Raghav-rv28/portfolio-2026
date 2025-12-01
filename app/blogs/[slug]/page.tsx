@@ -1,3 +1,4 @@
+import { BlogWindow } from "@/components/blog/BlogWindow";
 import { Navigation } from "@/components/blog/Navigation";
 import { BlogHeader } from "@/components/blog/BlogHeader";
 import { BlogContent } from "@/components/blog/BlogContent";
@@ -27,7 +28,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${blog.metadata.title} | Blog`,
+    title: `${blog.metadata.title} | Blogs`,
     description: blog.metadata.description,
   };
 }
@@ -47,15 +48,17 @@ export default async function BlogPostPage({
   const { Component, metadata } = blog;
 
   return (
-    <div className="w-full min-h-screen dark flex flex-col">
-      <Navigation />
-      <main className="flex-1 w-full max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-16">
-        <BlogHeader metadata={metadata} />
-        <BlogContent>
-          <Component />
-        </BlogContent>
-      </main>
-    </div>
+    <BlogWindow title={metadata.title}>
+      <div className="w-full dark flex flex-col px-6 md:px-8 py-12 md:py-16">
+        <Navigation />
+        <main className="flex-1 w-full flex flex-col justify-center items-center mx-auto">
+          <BlogHeader metadata={metadata} />
+          <BlogContent>
+            <Component />
+          </BlogContent>
+        </main>
+      </div>
+    </BlogWindow>
   );
 }
 

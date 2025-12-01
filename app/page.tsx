@@ -35,7 +35,7 @@ export default function Home() {
       {isMobile && <MobileWarning />}
       <Link
         href="/blogs"
-        className="absolute top-4 right-4 z-50"
+        className="absolute bottom-6 right-10 z-50"
         aria-label="Go to blogs"
       >
         <Button
