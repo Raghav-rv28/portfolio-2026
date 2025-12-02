@@ -72,7 +72,7 @@ function handleHelp(): CommandResult {
     "cat [file]    - Display file contents",
     "whoami        - Display user information",
     "neofetch      - Display system information",
-    "gui           - Open GUI mode (just kidding!)",
+    "gui           - Modern UI for a traditional, run of the mill portfolio",
     "date          - Show current date and time",
     "uptime        - Show system uptime",
     "pwd           - Print working directory",
