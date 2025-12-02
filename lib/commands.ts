@@ -95,13 +95,10 @@ function handleLs(path: string[]): CommandResult {
   }
   if (path[0] === "projects") {
     // Projects folder contains data.txt and individual project files
-    const projectNames = projects.map((p) => p.id);
-    return { output: `data.txt  ${projectNames.join("  ")}` };
+    const projectNames = projects.map((p) => `${p.id}.txt`);
+    return { output: projectNames.join("  ") };
   }
-  // All other folders contain data.txt
-  if (path.length === 1 && rootFolders.includes(path[0])) {
-    return { output: "data.txt" };
-  }
+
   return { output: "" };
 }
 
@@ -196,7 +193,7 @@ Experience: ${personal.yearsExperience}+ years`,
   }
   // Projects directory
   if (path.length === 1 && path[0] === "projects") {
-    const project = projects.find((p) => p.id === filename);
+    const project = projects.find((p) => `${p.id}.txt` === filename);
     if (project) {
       return { output: project.content };
     }
