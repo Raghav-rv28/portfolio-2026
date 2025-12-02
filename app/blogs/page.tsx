@@ -13,7 +13,7 @@ export default async function BlogsPage() {
   const blogs = await getAllBlogs();
 
   return (
-    <BlogWindow title=" Alex Chen's Blogs">
+    <BlogWindow title=" Raghav Rudhra's Blogs">
       <div className="w-full h-screen dark flex flex-col justify-center items-center gap-10 px-6 md:px-8 lg:px-12 py-12 md:py-16">
         <Navigation />
         <main className="flex-1 w-full mx-auto">

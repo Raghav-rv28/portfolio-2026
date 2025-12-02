@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Chen - Senior Software Engineer | Terminal Portfolio",
+  title: "Raghav Rudhra - Senior Software Engineer | Terminal Portfolio",
   description:
     "Interactive terminal portfolio of a senior software engineer with 6+ years of experience in full-stack development, backend architecture, and cloud infrastructure.",
   keywords: [
@@ -34,19 +34,19 @@ export const metadata: Metadata = {
     "AWS",
     "Docker",
   ],
-  authors: [{ name: "Alex Chen" }],
-  creator: "Alex Chen",
+  authors: [{ name: "Raghav Rudhra" }],
+  creator: "Raghav Rudhra",
   openGraph: {
-    title: "Alex Chen - Senior Software Engineer | Terminal Portfolio",
+    title: "Raghav Rudhra - Senior Software Engineer | Terminal Portfolio",
     description:
       "Interactive terminal portfolio showcasing projects, experience, and skills of a senior software engineer.",
     type: "website",
     locale: "en_US",
-    siteName: "Alex Chen Portfolio",
+    siteName: "Raghav Rudhra Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex Chen - Senior Software Engineer | Terminal Portfolio",
+    title: "Raghav Rudhra - Senior Software Engineer | Terminal Portfolio",
     description:
       "Interactive terminal portfolio of a senior software engineer with 6+ years of experience.",
   },
