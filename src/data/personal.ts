@@ -1,11 +1,11 @@
 export const personal = {
-  name: "Alex Chen",
+  name: "Raghav Rudhra",
   title: "Senior Software Engineer",
-  location: "San Francisco, CA",
-  yearsExperience: 6,
-  email: "alex.chen@example.com",
-  linkedin: "https://linkedin.com/in/alexchen",
-  github: "https://github.com/alexchen",
-  bio: "Senior full-stack engineer with 6+ years of experience building scalable web applications. Passionate about clean code, system design, and developer experience. Currently focused on backend architecture and cloud infrastructure.",
+  location: "Toronto, ON, Canada",
+  yearsExperience: 5,
+  email: "raghavrudhra28@gmail.com",
+  linkedin: "https://linkedin.com/in/Raghav-rv28",
+  github: "https://github.com/Raghav-rv28",
+  bio: "Senior full-stack engineer with 5+ years of experience building software solutions for small businesses and startups. Currently focused on building my own startup, while working full time as Lead Software Engineer at Dubai Jewellers.",
 };
 

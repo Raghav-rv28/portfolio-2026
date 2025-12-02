@@ -3,181 +3,259 @@ export interface Project {
   name: string;
   description: string;
   techStack: string[];
-  githubUrl?: string;
   liveUrl?: string;
   content: string;
 }
 
 export const projects: Project[] = [
   {
-    id: "distributed-task-queue",
-    name: "Distributed Task Queue System",
-    description: "High-performance distributed task queue built with Node.js and Redis, handling 10M+ tasks/day",
-    techStack: ["Node.js", "TypeScript", "Redis", "Docker", "AWS SQS", "PostgreSQL"],
-    githubUrl: "https://github.com/alexchen/task-queue",
-    liveUrl: "https://taskqueue.example.com",
-    content: `# Distributed Task Queue System
+    id: "pure-tracker",
+    name: "Pure Tracker",
+    description: "Professional jewelry inventory and bookkeeping system with real-time tracking, partial sales support, and hybrid caching architecture",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Clerk",
+      "shadcn/ui",
+      "Tailwind CSS",
+      "IndexedDB",
+      "Turbopack"
+    ],
+    liveUrl: "https://pure-tracker.vercel.app",
+    content: `# Pure Tracker
 
-A production-ready distributed task queue system designed for high-throughput workloads.
-
-## Features
-- Horizontal scaling with worker pools
-- Priority queues and delayed jobs
-- Automatic retries with exponential backoff
-- Real-time monitoring dashboard
-- Rate limiting and job deduplication
-
-## Architecture
-Built on Redis for job storage and coordination, with PostgreSQL for persistent
-logging and analytics. Workers can be scaled independently based on queue depth.
-
-## Performance
-- Handles 10M+ tasks per day
-- Sub-100ms job processing latency
-- 99.9% uptime SLA
-- Supports job priorities and scheduling
-
-## Tech Stack
-- Node.js & TypeScript
-- Redis Cluster
-- PostgreSQL
-- Docker & Kubernetes
-- AWS SQS (fallback)
-
-GitHub: https://github.com/alexchen/task-queue
-Live Demo: https://taskqueue.example.com`,
-  },
-  {
-    id: "real-time-collaboration",
-    name: "Real-Time Collaboration Platform",
-    description: "WebSocket-based collaborative editor with conflict resolution and presence awareness",
-    techStack: ["React", "Node.js", "WebSocket", "MongoDB", "AWS", "Docker"],
-    githubUrl: "https://github.com/alexchen/collab-editor",
-    liveUrl: "https://collab.example.com",
-    content: `# Real-Time Collaboration Platform
-
-A real-time collaborative editing platform with operational transformation for
-conflict-free concurrent editing.
+A comprehensive jewelry inventory management and bookkeeping system designed for gold and jewelry businesses. Features real-time inventory tracking, transaction management, and advanced caching strategies for optimal performance.
 
 ## Features
-- Real-time collaborative editing
-- Operational transformation for conflict resolution
-- Presence awareness (see who's typing)
-- Version history and rollback
-- WebSocket-based architecture
+
+- **Jewelry Inventory Management**
+  - Category-specific metadata (rings, chains, earrings, bracelets, diamonds, etc.)
+  - Weight, karat, and purity tracking
+  - Dynamic metadata fields based on product category
+  - Image support and product history
+
+- **Transaction Management**
+  - Purchase and sale tracking
+  - Partial product sales with review workflow
+  - Multi-product sales grouping
+  - Order types: sale, order, hold
+  - Payment method tracking (cash, card, gold weight)
+
+- **Vendor & Customer Management**
+  - Vendor balance tracking
+  - Customer profiles with order history
+  - Outstanding balance management
+  - Payment history tracking
+
+- **Dashboard & Analytics**
+  - Real-time statistics (inventory count, sales, vendors)
+  - Recent activity feed
+  - Customizable quick actions
+  - Gold price tracking integration
+
+- **User Management**
+  - Clerk authentication integration
+  - Role-based access (employee, manager, admin)
+  - User activity tracking
+  - Optimized onboarding with metadata caching
 
 ## Technical Highlights
-- Custom OT algorithm implementation
-- Efficient diff and patch operations
-- WebSocket connection pooling
-- MongoDB for document persistence
-- Redis for session management
+
+- **Hybrid Caching Architecture**
+  - Next.js 16 server-side caching (\`use cache\`) for reduced database load
+  - IndexedDB client-side caching for offline support and instant filtering
+  - Incremental cache updates for optimal performance
+  - 10x faster user lookups via Clerk metadata optimization
+
+- **Modern Next.js Architecture**
+  - Server Components for efficient data fetching
+  - Server Actions for type-safe database operations
+  - App Router with optimized routing
+  - Turbopack for fast development builds
+
+- **Type-Safe Database Layer**
+  - Drizzle ORM with PostgreSQL (Neon serverless)
+  - Comprehensive schema with relations and foreign keys
+  - Automatic transaction creation and inventory updates
+  - Price history tracking with audit trail
+
+- **Performance Optimizations**
+  - Granular entity storage in IndexedDB
+  - Batch query optimization
+  - Parallel data fetching for dashboard stats
+  - Efficient diff and patch operations
+
+- **UI/UX Excellence**
+  - shadcn/ui component library built on Radix UI
+  - Fully responsive mobile-first design
+  - Dark mode support
+  - Accessible components with proper ARIA labels
+  - Smooth animations and transitions
 
 ## Performance
-- Supports 100+ concurrent users per document
-- Sub-50ms latency for operations
-- Automatic reconnection and sync
 
-GitHub: https://github.com/alexchen/collab-editor
-Live Demo: https://collab.example.com`,
-  },
-  {
-    id: "microservices-orchestrator",
-    name: "Microservices Orchestration Framework",
-    description: "Service mesh and orchestration layer for managing 50+ microservices",
-    techStack: ["Go", "Kubernetes", "gRPC", "Prometheus", "Grafana", "Istio"],
-    githubUrl: "https://github.com/alexchen/service-orchestrator",
-    content: `# Microservices Orchestration Framework
-
-A comprehensive orchestration framework for managing microservices at scale.
-
-## Features
-- Service discovery and registration
-- Load balancing and circuit breakers
-- Distributed tracing
-- Health checks and auto-recovery
-- Configuration management
+- Supports real-time inventory updates with sub-second latency
+- Hybrid caching reduces database queries by 80%+
+- Offline-capable with IndexedDB fallback
+- Optimized user onboarding (10x faster lookups)
+- Server-side rendering for fast initial loads
 
 ## Architecture
-Built on Kubernetes with custom operators for service lifecycle management.
-Integrates with Istio for service mesh capabilities.
 
-## Capabilities
-- Manages 50+ microservices
-- Automatic scaling based on metrics
-- Blue-green deployments
-- Canary releases
-- Centralized logging and monitoring
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: Clerk with metadata-based user tracking
+- **Caching**: Next.js 16 \`use cache\` + IndexedDB hybrid strategy
+- **UI Framework**: Next.js 16 App Router with Server Components
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Build Tool**: Turbopack for development, Next.js for production
 
-GitHub: https://github.com/alexchen/service-orchestrator`,
+Live Demo: https://pure-tracker.vercel.app`,
   },
   {
-    id: "api-gateway",
-    name: "High-Performance API Gateway",
-    description: "Custom API gateway handling 1M+ requests/day with rate limiting and authentication",
-    techStack: ["Node.js", "TypeScript", "Redis", "JWT", "Nginx", "AWS"],
-    githubUrl: "https://github.com/alexchen/api-gateway",
-    liveUrl: "https://api.example.com",
-    content: `# High-Performance API Gateway
+    id: "bed-company-ecommerce",
+    name: "Bed Company E-commerce Showcase",
+    description: "Modern, mobile-first furniture showcase website for beds and mattresses with full admin management system",
+    techStack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Drizzle ORM", "PostgreSQL", "Neon", "shadcn/ui"],
+    liveUrl: "https://bed-company.vercel.app",
+    content: `# Bed Company E-commerce Showcase
 
-A custom-built API gateway designed for high throughput and low latency.
+A modern, mobile-first showcase website for a furniture store specializing in beds and mattresses. The platform features a beautiful public-facing site with product browsing, search, and contact functionality, plus a comprehensive admin panel for content management.
 
 ## Features
-- Request routing and load balancing
-- Rate limiting per API key/user
-- JWT authentication and authorization
-- Request/response transformation
-- API versioning
-- Request logging and analytics
+
+### Public-Facing Site
+- **Homepage** with hero section, featured products, and interactive bed layers visualization
+- **Product Catalog** with search, category filtering, and responsive grid layout
+- **Product Detail Pages** with image galleries, specifications, features, and stock status
+- **About Us Page** with dynamic store information and company story
+- **Contact Page** with form validation, store hours, and Google Maps integration
+- **Interactive Bed Layers** component with clickable data points
+- **Responsive Design** optimized for all screen sizes
+
+### Admin Management System
+- **Secure Authentication** with session-based login and bcrypt password hashing
+- **Admin Dashboard** with product statistics and quick access
+- **Product Management** with full CRUD operations (Create, Read, Update, Delete)
+- **Store Information Management** for contact details, hours, and social media
+- **Feature System** for assigning marketing features and badges to products
+- **Image Management** with support for multiple product images
+
+## Technical Highlights
+
+- **Next.js 16 App Router** with Server Components and Suspense boundaries
+- **Type-Safe Database** with Drizzle ORM and Neon Serverless PostgreSQL
+- **Modern UI Components** built with shadcn/ui and Radix UI primitives
+- **Advanced Animations** using Framer Motion and CSS transitions
+- **SEO Optimized** with dynamic metadata generation
+- **Performance Optimized** with lazy loading, code splitting, and image optimization
+- **Mobile-First Design** with Tailwind CSS 4 and responsive breakpoints
+
+## Architecture
+
+- **Server-Side Rendering** for optimal SEO and performance
+- **Type-Safe Queries** with Drizzle ORM for database operations
+- **Component-Based Architecture** with reusable UI components
+- **Environment-Based Configuration** for development and production
+- **Cookie-Based Sessions** for secure admin authentication
+
+## Database Schema
+
+- **Products Table**: Categories, images, features, specifications, pricing
+- **Admin Users Table**: Email-based authentication with password hashing
+- **Store Info Table**: Contact information, hours, social media links
+- **Features System**: Flexible feature assignment for products
 
 ## Performance
-- Handles 1M+ requests per day
-- P99 latency < 50ms
-- 99.99% uptime
-- Horizontal scaling support
 
-## Security
-- OAuth 2.0 integration
-- API key management
-- IP whitelisting
-- DDoS protection
-- Request validation
+- Optimized bundle sizes with dynamic imports
+- Lazy loading for heavy components
+- Efficient database queries with proper indexing
+- Fast page loads with Next.js optimizations
 
-GitHub: https://github.com/alexchen/api-gateway
-Live Demo: https://api.example.com`,
+Live Demo: https://bed-company.vercel.app`,
   },
   {
-    id: "monitoring-dashboard",
-    name: "Infrastructure Monitoring Dashboard",
-    description: "Real-time monitoring dashboard for cloud infrastructure with custom alerting",
-    techStack: ["React", "TypeScript", "Grafana", "Prometheus", "WebSocket", "D3.js"],
-    githubUrl: "https://github.com/alexchen/monitoring-dashboard",
-    content: `# Infrastructure Monitoring Dashboard
+    id: "variable-pricing-shopify-app",
+    name: "Variable Pricing Shopify App",
+    description: "Shopify admin app for automated weight-based product pricing with bulk updates, tiered pricing, and professional PDF document generation",
+    techStack: ["Remix", "TypeScript", "React", "Shopify App Remix", "Prisma", "PostgreSQL", "Shopify Polaris", "Shopify UI Extensions", "Vite"],
+    content: `# Variable Pricing Shopify App
 
-A comprehensive monitoring solution for cloud infrastructure and applications.
+A comprehensive Shopify admin application that automates product pricing based on weight calculations. The app enables merchants to set up simple or tiered pricing rules, perform bulk price updates across collections, and generate professional PDF documents (invoices, appraisals, and delivery receipts) for orders.
 
-## Features
-- Real-time metrics visualization
-- Custom alerting rules
-- Multi-cloud support (AWS, GCP, Azure)
-- Cost tracking and optimization
-- Incident management
+## Technical Highlights
 
-## Integrations
-- Prometheus for metrics collection
-- Grafana for visualization
-- PagerDuty for alerting
-- Slack notifications
-- Custom webhook support
+- **Remix Framework**: Modern full-stack framework with server-side rendering
+- **Shopify App Remix**: Official Shopify integration with OAuth, GraphQL API, and webhooks
+- **Type-Safe Development**: Full TypeScript implementation
+- **Prisma ORM**: Type-safe database access with PostgreSQL
+- **Shopify Polaris**: Consistent UI components matching Shopify admin design
+- **Shopify UI Extensions**: Custom admin extensions for enhanced functionality
+- **GraphQL API**: Efficient data fetching from Shopify Admin API
+- **Bulk Operations**: Optimized bulk mutations for price updates
+- **Session Management**: Secure session storage with Prisma
 
-## Capabilities
-- Monitor 100+ services
-- Track 1000+ metrics
-- Real-time dashboards
-- Historical data analysis
-- Automated incident response
+## Architecture
 
-GitHub: https://github.com/alexchen/monitoring-dashboard`,
+- **Server-Side Rendering**: Remix loader/action pattern for data fetching
+- **GraphQL Queries**: Efficient data fetching with cursor-based pagination
+- **Bulk Mutations**: Optimized bulk product variant updates
+- **Extension System**: Modular admin extensions for specific features
+- **Route-Based Architecture**: File-based routing with Remix conventions
+- **Environment Configuration**: Secure environment variable management
+
+## Key Functionalities
+
+### Pricing Calculation
+
+- **Weight Extraction**: Automatically extracts weight from product variant inventory items
+- **Price Calculation**: Multiplies weight by configured multiplier(s)
+- **Tier Matching**: Finds appropriate pricing tier based on weight thresholds
+- **Bulk Processing**: Handles large product catalogs efficiently
+
+### Document Generation
+
+- **Invoice Generation**: Complete invoice with line items, taxes, discounts, and totals
+- **Appraisal Documents**: Professional valuation documents with disclaimers
+- **Delivery Receipts**: Delivery confirmation documents with signature sections
+- **Dynamic Content**: Pulls order data, customer information, and product details
+- **Print Styling**: CSS optimized for both screen and print media
+
+## Performance Optimizations
+
+- **Cursor-Based Pagination**: Efficient handling of large product catalogs
+- **Bulk GraphQL Mutations**: Minimizes API calls for price updates
+- **Lazy Loading**: Components loaded on demand
+- **Optimized Queries**: Selective field fetching to reduce payload size
+- **Error Handling**: Graceful error handling with user-friendly messages
+
+## Security Features
+
+- **OAuth Authentication**: Secure Shopify OAuth flow
+- **Session Management**: Secure session storage
+- **CORS Handling**: Proper CORS configuration for print routes
+- **Input Validation**: Server-side validation for all inputs
+- **Error Boundaries**: Graceful error handling
+
+## Development Workflow
+
+- **Shopify CLI Integration**: Seamless local development with tunneling
+- **Hot Module Replacement**: Fast development iteration
+- **TypeScript**: Type safety throughout the codebase
+- **ESLint**: Code quality and consistency
+- **Prisma Migrations**: Database schema versioning
+
+## Deployment
+
+- **Vercel Ready**: Optimized for Vercel deployment with @vercel/remix
+- **Docker Support**: Containerized deployment option
+- **Environment Variables**: Secure configuration management
+- **Database Migrations**: Automated schema deployment
+**Note**: This project is deployed on Shopify store and is for internal use only.`,
   },
+
 ];
 

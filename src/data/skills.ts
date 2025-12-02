@@ -13,11 +13,15 @@ export const skills: SkillCategory[] = [
     items: [
       "React",
       "Next.js",
+      "Remix",
       "Express.js",
-      "NestJS",
       "FastAPI",
       "GraphQL",
       "gRPC",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Shopify App Remix",
+      "Shopify Polaris",
     ],
   },
   {
@@ -29,6 +33,9 @@ export const skills: SkillCategory[] = [
       "MySQL",
       "DynamoDB",
       "Elasticsearch",
+      "Drizzle ORM",
+      "Prisma",
+      "IndexedDB",
     ],
   },
   {
@@ -40,6 +47,7 @@ export const skills: SkillCategory[] = [
       "Terraform",
       "CI/CD (GitHub Actions, Jenkins)",
       "Nginx",
+      "Neon (Serverless PostgreSQL)",
     ],
   },
   {
@@ -53,6 +61,10 @@ export const skills: SkillCategory[] = [
       "Grafana",
       "Jest",
       "Playwright",
+      "Vite",
+      "Turbopack",
+      "Clerk",
+      "Shopify UI Extensions",
     ],
   },
   {
