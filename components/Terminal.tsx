@@ -43,7 +43,7 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
       if (index < welcomeText.length) {
         term.write(welcomeText[index]);
         index++;
-        setTimeout(typeChar, 30);
+        setTimeout(typeChar, 15);
       } else {
         isTypingWelcomeRef.current = false;
         writePrompt(term, stateRef.current.currentPath);
