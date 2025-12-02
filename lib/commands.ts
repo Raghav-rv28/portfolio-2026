@@ -1,7 +1,7 @@
-import { personal } from "@/src/data/personal";
-import { projects } from "@/src/data/projects";
-import { experience } from "@/src/data/experience";
-import { skills } from "@/src/data/skills";
+import { personal } from "@/lib/data/personal";
+import { projects } from "@/lib/data/projects";
+import { experience } from "@/lib/data/experience";
+import { skills } from "@/lib/data/skills";
 import { getPathString, formatUptime, type TerminalState } from "./terminal";
 import { redirect } from "next/navigation";
 
@@ -15,8 +15,8 @@ export type HistoryProvider = {
   getAllWithTimestamps: () => Array<{ command: string; timestamp: Date }>;
 };
 
-const rootFolders = ["about", "projects", "experience", "skills", "contact"];
-const rootFiles = ["readme.txt", "resume.pdf"];
+const rootFolders = ["projects", "experience"];
+const rootFiles = ["readme.txt", "resume.pdf", "about.txt", "skills.txt", "contact.txt"];
 
 export function executeCommand(
   command: string,
@@ -52,6 +52,8 @@ export function executeCommand(
       return handlePwd(state.currentPath);
     case "history":
       return handleHistory(historyProvider);
+    case "blogs":
+      redirect("/blogs");
     case "":
       return { output: "" };
     default:
@@ -75,13 +77,11 @@ function handleHelp(): CommandResult {
     "uptime        - Show system uptime",
     "pwd           - Print working directory",
     "history       - Show command history",
+    "blogs         - Redirect to blogs page",
     "",
     "Navigation:",
-    "  cd about        - Navigate to about folder",
     "  cd projects     - Navigate to projects folder",
     "  cd experience   - Navigate to experience folder",
-    "  cd skills       - Navigate to skills folder",
-    "  cd contact      - Navigate to contact folder",
     "",
     "  Inside any folder, use 'cat data.txt' to view contents",
   ];
@@ -173,15 +173,9 @@ ${personal.linkedin}
 Or contact me at: ${personal.email}`,
       };
     }
-  }
-
-  // Handle data.txt in different folders
-  if (filename === "data.txt" && path.length === 1) {
-    const folder = path[0].toLowerCase();
-    switch (folder) {
-      case "about":
-        return {
-          output: `About ${personal.name}
+    if (filename === "about.txt") {
+      return {
+        output: `About ${personal.name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${personal.name}
@@ -191,33 +185,21 @@ ${personal.bio}
 
 Location: ${personal.location}
 Experience: ${personal.yearsExperience}+ years`,
-        };
-      case "experience":
-        return handleExperience();
-      case "skills":
-        return handleSkills();
-      case "contact":
-        return handleContact();
-      default:
-        break;
+      }
+    }
+    if (filename === "skills.txt") {
+      return handleSkills();
+    }
+    if (filename === "contact.txt") {
+      return handleContact();
     }
   }
-
   // Projects directory
   if (path.length === 1 && path[0] === "projects") {
-    if (filename === "data.txt") {
-      return handleProjects();
-    }
     const project = projects.find((p) => p.id === filename);
     if (project) {
       return { output: project.content };
     }
-  }
-
-  // Try to find project by name from root (backward compatibility)
-  const project = projects.find((p) => p.id === filename);
-  if (project) {
-    return { output: project.content };
   }
 
   return {
@@ -347,9 +329,10 @@ ${expList}`,
 
 function handleSkills(): CommandResult {
   const skillsList = skills
-    .map((category) => {
-      const items = category.items.join(", ");
-      return `${category.name.padEnd(20)} ${items}`;
+    .map((category, index) => {
+      const items = category.items.map((item) => `  • ${item}`).join("\n");
+      const separator = index < skills.length - 1 ? "\n" : "";
+      return `**${category.name}**\n${items}${separator}`;
     })
     .join("\n");
   return {

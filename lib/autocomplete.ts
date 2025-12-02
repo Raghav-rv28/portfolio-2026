@@ -1,4 +1,4 @@
-import { projects } from "@/src/data/projects";
+import { projects } from "@/lib/data/projects";
 
 export interface AutocompleteResult {
   matches: string[];
@@ -21,6 +21,7 @@ const allCommands = [
   "projects",
   "experience",
   "skills",
+  "history",
 ];
 
 const rootFolders = [

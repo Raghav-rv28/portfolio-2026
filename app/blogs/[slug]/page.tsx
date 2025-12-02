@@ -2,7 +2,7 @@ import { BlogWindow } from "@/components/blog/BlogWindow";
 import { Navigation } from "@/components/blog/Navigation";
 import { BlogHeader } from "@/components/blog/BlogHeader";
 import { BlogContent } from "@/components/blog/BlogContent";
-import { getBlogBySlug, getAllBlogSlugs } from "@/src/lib/blogs";
+import { getBlogBySlug, getAllBlogSlugs } from "@/lib/blogs";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 

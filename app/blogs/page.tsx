@@ -1,7 +1,7 @@
 import { BlogWindow } from "@/components/blog/BlogWindow";
 import { Navigation } from "@/components/blog/Navigation";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { getAllBlogs } from "@/src/lib/blogs";
+import { getAllBlogs } from "@/lib/blogs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

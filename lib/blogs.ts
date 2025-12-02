@@ -13,8 +13,8 @@ export interface BlogMetadata {
 
 // Get all blog posts metadata
 export async function getAllBlogs(): Promise<BlogMetadata[]> {
-  const blogsDirectory = path.join(process.cwd(), "src/content/blogs");
-  
+  const blogsDirectory = path.join(process.cwd(), "lib/content/blogs");
+
   if (!fs.existsSync(blogsDirectory)) {
     return [];
   }
@@ -28,10 +28,10 @@ export async function getAllBlogs(): Promise<BlogMetadata[]> {
         const slug = file.replace(/\.mdx$/, "");
         // Use dynamic import with explicit path
         const blogModule = await import(
-          `@/src/content/blogs/${file}`
+          `@/lib/content/blogs/${file}`
         );
         const { metadata } = blogModule;
-        
+
         if (metadata) {
           blogs.push({
             slug,
@@ -57,9 +57,9 @@ export async function getBlogBySlug(slug: string): Promise<{
 } | null> {
   try {
     const { default: Component, metadata } = await import(
-      `@/src/content/blogs/${slug}.mdx`
+      `@/lib/content/blogs/${slug}.mdx`
     );
-    
+
     if (!metadata) {
       return null;
     }
@@ -79,8 +79,8 @@ export async function getBlogBySlug(slug: string): Promise<{
 
 // Get all blog slugs for static generation
 export function getAllBlogSlugs(): string[] {
-  const blogsDirectory = path.join(process.cwd(), "src/content/blogs");
-  
+  const blogsDirectory = path.join(process.cwd(), "lib/content/blogs");
+
   if (!fs.existsSync(blogsDirectory)) {
     return [];
   }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { BlogMetadata } from "@/src/lib/blogs";
+import type { BlogMetadata } from "@/lib/blogs";
 
 interface BlogCardProps {
   blog: BlogMetadata;

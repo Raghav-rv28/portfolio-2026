@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import type { BlogMetadata } from "@/src/lib/blogs";
+import type { BlogMetadata } from "@/lib/blogs";
 
 interface BlogHeaderProps {
   metadata: BlogMetadata;

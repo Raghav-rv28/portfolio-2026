@@ -4,9 +4,9 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Terminal as XTerm } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import "@xterm/xterm/css/xterm.css";
-import { executeCommand } from "@/src/lib/commands";
-import { CommandHistory } from "@/src/lib/history";
-import { getAutocompleteSuggestion } from "@/src/lib/autocomplete";
+import { executeCommand } from "@/lib/commands";
+import { CommandHistory } from "@/lib/history";
+import { getAutocompleteSuggestion } from "@/lib/autocomplete";
 import {
   getInitialState,
   navigatePath,
@@ -14,8 +14,8 @@ import {
   formatUptime,
   saveState,
   type TerminalState,
-} from "@/src/lib/terminal";
-import { personal } from "@/src/data/personal";
+} from "@/lib/terminal";
+import { personal } from "@/lib/data/personal";
 
 interface TerminalProps {
   onOpenModal: () => void;
@@ -124,8 +124,8 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
         cursorAccent: "#00ffff",
       },
       fontFamily: '"Geist Mono", "Courier New", monospace',
-      fontSize: 14,
-      lineHeight: 1.2,
+      fontSize: 18,
+      lineHeight: 1.7,
       cursorBlink: true,
       cursorStyle: "block",
       allowTransparency: true,
@@ -194,45 +194,73 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
     // Handle input
     let currentLine = "";
     let escapeSequence = "";
+    
+    const updateLine = (newLine: string) => {
+      currentLine = newLine;
+      currentLineRef.current = newLine;
+      const prompt = `${getPathString(stateRef.current.currentPath)} $ `;
+      // Move to start of line, clear entire line, then rewrite prompt and new line
+      term.write("\r\x1b[2K"); // \r = return to start, \x1b[2K = clear entire line
+      term.write(`${prompt}${newLine}`);
+    };
+    
     term.onData((data) => {
       if (isTypingWelcomeRef.current) return;
 
-      // Handle escape sequences (arrow keys)
-      if (escapeSequence) {
-        escapeSequence += data;
-        if (escapeSequence === "\x1b[A" || escapeSequence === "\u001b[A") {
+      // Check if data itself contains escape sequences (handles cases where it comes in one chunk)
+      if (data.includes("\x1b[") || data.includes("\u001b[")) {
+        if (data.includes("A") && (data.includes("\x1b[A") || data.includes("\u001b[A") || data.endsWith("A"))) {
           // Up arrow
           const prev = historyRef.current.getPrevious();
           if (prev !== null) {
-            currentLine = prev;
-            currentLineRef.current = prev;
-            const prompt = `${getPathString(stateRef.current.currentPath)} $ `;
-            term.write("\r" + " ".repeat(prompt.length + currentLine.length + 10));
-            term.write(`\r${prompt}${currentLine}`);
+            updateLine(prev);
           }
           escapeSequence = "";
           return;
         }
-        if (escapeSequence === "\x1b[B" || escapeSequence === "\u001b[B") {
+        if (data.includes("B") && (data.includes("\x1b[B") || data.includes("\u001b[B") || data.endsWith("B"))) {
           // Down arrow
           const next = historyRef.current.getNext();
           if (next !== null) {
-            currentLine = next;
-            currentLineRef.current = next;
-            const prompt = `${getPathString(stateRef.current.currentPath)} $ `;
-            term.write("\r" + " ".repeat(prompt.length + currentLine.length + 10));
-            term.write(`\r${prompt}${currentLine}`);
+            updateLine(next);
           } else {
-            currentLine = "";
-            currentLineRef.current = "";
-            const prompt = `${getPathString(stateRef.current.currentPath)} $ `;
-            term.write("\r" + " ".repeat(prompt.length + 10));
-            term.write(`\r${prompt}`);
+            updateLine("");
           }
           escapeSequence = "";
           return;
         }
-        if (escapeSequence.length > 5) {
+      }
+
+      // Handle escape sequences (arrow keys) - multi-chunk handling
+      if (escapeSequence) {
+        escapeSequence += data;
+        
+        // Check for complete escape sequences (arrow keys)
+        // Format: ESC[ followed by A (up) or B (down)
+        if (escapeSequence.includes("[A") || escapeSequence.endsWith("A")) {
+          // Up arrow
+          const prev = historyRef.current.getPrevious();
+          if (prev !== null) {
+            updateLine(prev);
+          }
+          escapeSequence = "";
+          return;
+        }
+        
+        if (escapeSequence.includes("[B") || escapeSequence.endsWith("B")) {
+          // Down arrow
+          const next = historyRef.current.getNext();
+          if (next !== null) {
+            updateLine(next);
+          } else {
+            updateLine("");
+          }
+          escapeSequence = "";
+          return;
+        }
+        
+        // Reset if sequence is too long or doesn't match expected pattern
+        if (escapeSequence.length > 10) {
           escapeSequence = "";
         }
         return;
@@ -240,9 +268,15 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
 
       const code = data.charCodeAt(0);
 
-      // ESC key - start of escape sequence
+      // ESC key (code 27) - start of escape sequence
       if (code === 27) {
         escapeSequence = data;
+        return;
+      }
+      
+      // If we receive '[' after ESC, continue building escape sequence
+      if (data === "[" && escapeSequence) {
+        escapeSequence += data;
         return;
       }
 
@@ -286,6 +320,10 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
 
       // Regular character
       if (code >= 32 && code <= 126) {
+        // Reset any partial escape sequence
+        if (escapeSequence) {
+          escapeSequence = "";
+        }
         currentLine += data;
         currentLineRef.current = currentLine;
         term.write(data);
@@ -332,7 +370,7 @@ export default function Terminal({ onOpenModal }: TerminalProps) {
         <div className="select-none relative flex items-center justify-between px-3 py-2 bg-[#0a0a0a] border-b-2 border-[#00ff00] min-h-[32px] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[rgba(0,255,0,0.5)] before:to-transparent">
           <div className="flex items-center gap-2">
             <span className="text-[#00ff00] font-mono text-xs sm:text-sm">
-              Alex Chen's Portfolio Terminal v1.0
+              Raghav Rudhra's Portfolio Terminal v1.0
             </span>
           </div>
           <div className="flex items-center gap-2">
