@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+USE PNPM as package manager.
