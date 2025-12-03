@@ -49,7 +49,7 @@ export default async function BlogPostPage({
 
   return (
     <BlogWindow title={metadata.title}>
-      <div className="w-full dark flex flex-col px-6 md:px-8 py-12 md:py-16">
+      <div className="w-full dark flex flex-col px-6 md:px-8">
         <Navigation />
         <main className="flex-1 w-full flex flex-col justify-center items-center mx-auto">
           <BlogHeader metadata={metadata} />

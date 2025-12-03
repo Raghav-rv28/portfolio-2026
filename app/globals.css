@@ -83,10 +83,19 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins and padding on common block elements instead of all elements */
+body,
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, li,
+blockquote, pre {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html,
@@ -224,6 +233,7 @@ a:hover {
   border: 3px solid var(--pop-art-neon-green);
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
   transition: all 0.3s ease;
+  padding: 1rem;
 }
 
 .blog-card:hover {
@@ -235,8 +245,9 @@ a:hover {
 .blog-title {
   font-family: var(--font-space-grotesk);
   font-weight: 700;
+  color: var(--pop-art-cyan);
   letter-spacing: -0.02em;
-  text-shadow: 2px 2px 0 var(--pop-art-neon-green);
+  text-shadow: 2px 2px 0 rgba(0, 255, 0, 0.5);
 }
 
 .blog-accent {

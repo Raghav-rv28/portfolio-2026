@@ -6,7 +6,7 @@ import { Home } from "lucide-react";
 
 export function Navigation() {
   return (
-    <nav className="w-full border-b-4 border-[#00ff00] bg-[#0a0a0a] py-4 md:py-6 px-6 md:px-8">
+    <nav className="w-full flex justify-center items-center border-b-4 border-[#00ff00] bg-[#0a0a0a] py-1 md:p-6">
       <div className="w-full mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
           <Home className="w-5 h-5 text-[#00ff00] group-hover:text-[#00ffff] transition-colors" />

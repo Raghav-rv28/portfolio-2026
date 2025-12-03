@@ -21,11 +21,11 @@ export function BlogCard({ blog }: BlogCardProps) {
         <Link href={`/blogs/${blog.slug}`} className="h-full">
         <CardHeader className="pt-6">
           <div className="flex items-start justify-between gap-4 mb-2">
-            <CardTitle className="text-2xl font-bold text-[#00ffff] line-clamp-2 flex-1" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+            <CardTitle className="blog-title text-2xl font-bold text-[#00ffff] line-clamp-2 flex-1" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
               {blog.title}
             </CardTitle>
           </div>
-          <CardDescription className="text-[#00ff00]/70 text-base font-medium">
+          <CardDescription className="text-[#00ff00] text-base font-medium">
             {formatDate(blog.date)} • {blog.author}
           </CardDescription>
         </CardHeader>
@@ -34,7 +34,7 @@ export function BlogCard({ blog }: BlogCardProps) {
             {blog.description}
           </p>
           {blog.tags && blog.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-auto">
+            <div className="flex flex-wrap gap-2 mt-4">
               {blog.tags.map((tag) => (
                 <Badge
                   key={tag}

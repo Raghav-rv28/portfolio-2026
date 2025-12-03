@@ -14,16 +14,15 @@ export default async function BlogsPage() {
 
   return (
     <BlogWindow title=" Raghav Rudhra's Blogs">
-      <div className="w-full h-screen dark flex flex-col justify-center items-center gap-10 px-6 md:px-8 lg:px-12 py-12 md:py-16">
+      <div className="w-full h-screen dark flex flex-col justify-center items-center gap-10 px-6 md:px-8 lg:px-12">
         <Navigation />
         <main className="flex-1 w-full mx-auto">
-
           {blogs.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-xl text-foreground/60">No blog posts yet. Check back soon!</p>
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4">
               {blogs.map((blog) => (
                 <div key={blog.slug} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)] max-w-md">
                   <BlogCard blog={blog} />

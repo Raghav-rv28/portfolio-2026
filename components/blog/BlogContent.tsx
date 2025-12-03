@@ -14,6 +14,7 @@ export function BlogContent({ children }: BlogContentProps) {
     "[&>h2]:text-[#00ffff]",
     "[&>h3]:text-[#00ffff]",
     
+    "[&>p]:my-4",
     // Lists
     "[&>ul]:list-disc [&>ul]:list-inside [&>ul]:space-y-2",
     "[&>ol]:list-decimal [&>ol]:list-inside [&>ol]:space-y-2",
