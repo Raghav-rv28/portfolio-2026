@@ -14,7 +14,7 @@ export default async function BlogsPage() {
 
   return (
     <BlogWindow title=" Raghav Rudhra's Blogs">
-      <div className="w-full h-screen dark flex flex-col justify-center items-center gap-10 px-6 md:px-8 lg:px-12">
+      <div className="w-full h-[90vh] dark flex flex-col justify-center items-center gap-10">
         <Navigation />
         <main className="flex-1 w-full mx-auto">
           {blogs.length === 0 ? (
