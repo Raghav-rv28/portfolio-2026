@@ -54,6 +54,8 @@ export function executeCommand(
       return handleHistory(historyProvider);
     case "blogs":
       redirect("/blogs");
+    case "projects":
+      redirect("/projects");
     case "":
       return { output: "" };
     default:
@@ -78,6 +80,7 @@ function handleHelp(): CommandResult {
     "pwd           - Print working directory",
     "history       - Show command history",
     "blogs         - Redirect to blogs page",
+    "projects      - Redirect to projects page",
     "",
     "Navigation:",
     "  cd projects     - Navigate to projects folder",

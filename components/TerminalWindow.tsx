@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 interface TerminalWindowProps {
   title: string;
@@ -17,6 +18,8 @@ export function TerminalWindow({
   showControls = true,
   titleRight,
 }: TerminalWindowProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-[#0a0a0a] px-3 sm:px-4 md:px-6 lg:px-8">
       <div
@@ -44,8 +47,8 @@ export function TerminalWindow({
               <button
                 className="flex items-center justify-center cursor-default relative transition-all duration-200 shrink-0 w-4 h-4 border border-[#00ff00] bg-[#0a0a0a] hover:bg-[#00ff00] hover:shadow-[0_0_8px_currentColor] active:scale-95 group"
                 aria-label="Minimize"
-                disabled
-                tabIndex={-1}
+                disabled={pathname === "/"}
+                onClick={() => router.push("/")}
               >
                 <span className="text-[#00ff00] text-xs leading-none font-bold group-hover:text-[#0a0a0a] transition-colors">
                   −
@@ -55,8 +58,8 @@ export function TerminalWindow({
               <button
                 className="flex items-center justify-center cursor-default relative transition-all duration-200 shrink-0 w-4 h-4 border border-[#ff0000] bg-[#0a0a0a] hover:bg-[#ff0000] hover:shadow-[0_0_8px_currentColor] active:scale-95 group"
                 aria-label="Close"
-                disabled
-                tabIndex={-1}
+                disabled={pathname === "/"}
+                onClick={() => router.push("/")}
               >
                 <span className="text-[#ff0000] text-xs leading-none font-bold group-hover:text-[#0a0a0a] transition-colors">
                   ×
