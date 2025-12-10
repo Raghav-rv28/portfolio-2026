@@ -31,9 +31,9 @@ export function ProjectSection({
       }}
     >
       {title && (
-        <div className="sticky top-0 bg-[#0a0a0a] border-b border-[#00ff00]/30 px-3 py-2 z-10 flex-shrink-0">
+        <div className="sticky top-0 bg-[#0a0a0a] border-b border-[#00ff00]/30 px-3 py-2 z-10 shrink-0">
           <h3
-            className="text-[#00ffff] font-mono text-sm font-bold"
+            className="text-[#00ffff] text-sm font-bold"
             style={{ fontFamily: "var(--font-mono)" }}
           >
             {title}
