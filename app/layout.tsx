@@ -36,6 +36,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Raghav Rudhra" }],
   creator: "Raghav Rudhra",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   openGraph: {
     title: "Raghav Rudhra - Senior Software Engineer | Terminal Portfolio",
     description:
